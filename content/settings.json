@@ -1,0 +1,11 @@
+{
+  "company_name": "Rakowski Mława",
+  "phone": "607 347 096",
+  "address": "Wójtostwo 64, 06-500 Mława",
+  "instagram": "https://www.instagram.com/wypozyczalnia.rakowski.mlawa",
+  "facebook": "https://www.facebook.com/share/18Wg8k3YzN/",
+  "hours": [
+    {"days": "Poniedziałek – Sobota", "time": "08:00 – 20:00"},
+    {"days": "Niedziela", "time": "09:00 – 17:00"}
+  ]
+}

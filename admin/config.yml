@@ -1,0 +1,170 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: 'pl'
+
+media_folder: "images"
+public_folder: "/images"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  - name: "settings"
+    label: "⚙️ Ustawienia"
+    files:
+      - name: "general"
+        label: "Dane firmy"
+        file: "content/settings.json"
+        fields:
+          - {label: "Nazwa firmy", name: "company_name", widget: "string"}
+          - {label: "Telefon", name: "phone", widget: "string"}
+          - {label: "Adres", name: "address", widget: "string"}
+          - {label: "Instagram URL", name: "instagram", widget: "string", required: false}
+          - {label: "Facebook URL", name: "facebook", widget: "string", required: false}
+          - label: "Godziny otwarcia"
+            name: "hours"
+            widget: "list"
+            summary: "{{fields.days}}: {{fields.time}}"
+            fields:
+              - {label: "Dni", name: "days", widget: "string"}
+              - {label: "Godziny", name: "time", widget: "string"}
+
+      - name: "seo"
+        label: "SEO"
+        file: "content/seo.json"
+        fields:
+          - {label: "Tytuł strony (meta title)", name: "meta_title", widget: "string"}
+          - {label: "Opis strony (meta description)", name: "meta_description", widget: "text"}
+          - {label: "Słowa kluczowe (meta keywords)", name: "meta_keywords", widget: "text"}
+          - {label: "OG Image (1200x630px)", name: "og_image", widget: "image", required: false}
+
+      - name: "footer"
+        label: "Stopka"
+        file: "content/footer.json"
+        fields:
+          - {label: "Opis firmy", name: "description", widget: "text"}
+          - {label: "Tekst copyright", name: "copyright", widget: "string"}
+          - {label: "Autor strony", name: "author", widget: "string"}
+          - {label: "URL autora", name: "author_url", widget: "string"}
+
+  - name: "hero_section"
+    label: "🏠 Nagłówek (Hero)"
+    files:
+      - name: "hero"
+        label: "Sekcja Hero"
+        file: "content/hero.json"
+        fields:
+          - {label: "Tytuł główny", name: "title", widget: "string"}
+          - {label: "Podtytuł", name: "subtitle", widget: "string"}
+          - {label: "Lokalizacja", name: "location", widget: "string"}
+          - {label: "Opis", name: "description", widget: "text"}
+          - {label: "Tekst przycisku", name: "cta_text", widget: "string"}
+          - {label: "Badge (np. 5.0 ★ · 169 opinii)", name: "badge", widget: "string"}
+          - {label: "Zdjęcie w tle", name: "bg_image", widget: "image", required: false}
+
+  - name: "features_section"
+    label: "💪 Dlaczego my"
+    files:
+      - name: "features"
+        label: "Cechy firmy"
+        file: "content/features.json"
+        fields:
+          - {label: "Nagłówek sekcji", name: "section_title", widget: "string"}
+          - label: "Cechy"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.icon}} {{fields.title}}"
+            fields:
+              - {label: "Ikona (emoji)", name: "icon", widget: "string", hint: "Np. 📦 🔧 💰 🎧 ⚡ 📅"}
+              - {label: "Tytuł", name: "title", widget: "string"}
+              - {label: "Opis", name: "description", widget: "string"}
+
+  - name: "categories"
+    label: "🔨 Kategorie sprzętu"
+    folder: "content/categories"
+    extension: "json"
+    format: "json"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{fields.order}}. {{fields.title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - {label: "Nazwa kategorii", name: "title", widget: "string"}
+      - {label: "Krótki opis", name: "description", widget: "string"}
+      - {label: "Zdjęcie", name: "image", widget: "image"}
+      - {label: "Kolejność wyświetlania", name: "order", widget: "number", default: 100, value_type: "int", hint: "Mniejsza liczba = wyżej na stronie"}
+
+  - name: "more_card_section"
+    label: "📞 Kafelek 'I wiele więcej'"
+    files:
+      - name: "more_card"
+        label: "Kafelek na końcu kategorii"
+        file: "content/more_card.json"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Opis", name: "description", widget: "text"}
+          - {label: "Pokaż kafelek", name: "show", widget: "boolean", default: true}
+
+  - name: "reviews_section"
+    label: "⭐ Opinie klientów"
+    files:
+      - name: "reviews"
+        label: "Opinie"
+        file: "content/reviews.json"
+        fields:
+          - {label: "Nagłówek sekcji", name: "section_title", widget: "string"}
+          - {label: "Łączna liczba opinii", name: "review_count", widget: "number"}
+          - {label: "Średnia ocena", name: "rating", widget: "string", default: "5.0"}
+          - label: "Opinie"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} - ★{{fields.rating}}"
+            fields:
+              - {label: "Imię i nazwisko", name: "name", widget: "string"}
+              - {label: "Treść opinii", name: "text", widget: "text"}
+              - {label: "Ocena (1-5)", name: "rating", widget: "number", default: 5, min: 1, max: 5, value_type: "int"}
+
+  - name: "faq_section"
+    label: "❓ FAQ"
+    files:
+      - name: "faq"
+        label: "Pytania i odpowiedzi"
+        file: "content/faq.json"
+        fields:
+          - {label: "Nagłówek sekcji", name: "section_title", widget: "string"}
+          - label: "Pytania"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - {label: "Pytanie", name: "question", widget: "string"}
+              - {label: "Odpowiedź", name: "answer", widget: "text"}
+
+  - name: "contact_section"
+    label: "📍 Kontakt"
+    files:
+      - name: "contact"
+        label: "Sekcja kontakt"
+        file: "content/contact.json"
+        fields:
+          - {label: "Nagłówek sekcji", name: "section_title", widget: "string"}
+          - {label: "Etykieta telefon", name: "phone_label", widget: "string"}
+          - {label: "Tekst przycisku", name: "phone_cta", widget: "string"}
+          - {label: "Etykieta adres", name: "address_label", widget: "string"}
+          - {label: "Adres", name: "address", widget: "string"}
+          - {label: "Zapytanie do mapy Google", name: "map_query", widget: "string", hint: "Adres który Google Maps pokaże na mapie"}
+
+  - name: "pages"
+    label: "📄 Strony"
+    files:
+      - name: "privacy"
+        label: "Polityka prywatności"
+        file: "content/privacy.md"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Treść", name: "body", widget: "markdown"}

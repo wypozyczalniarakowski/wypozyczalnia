@@ -1,0 +1,11 @@
+{
+  "section_title": "Setki zadowolonych klientów w Mławie i okolicach",
+  "items": [
+    {"icon": "📦", "title": "Duży wybór sprzętu", "description": "Setki maszyn w jednym miejscu."},
+    {"icon": "🔧", "title": "Sprzęt w świetnym stanie", "description": "Serwisowany i sprawdzony przed każdym wynajmem."},
+    {"icon": "💰", "title": "Konkurencyjne ceny", "description": "Uczciwe stawki bez ukrytych kosztów."},
+    {"icon": "🎧", "title": "Fachowe doradztwo", "description": "Pomożemy dobrać sprzęt do Twojego zadania."},
+    {"icon": "⚡", "title": "Szybka obsługa", "description": "Bez zbędnych formalności, ruszasz od razu."},
+    {"icon": "📅", "title": "Dostępność od ręki", "description": "Sprzęt wydajemy tego samego dnia."}
+  ]
+}
